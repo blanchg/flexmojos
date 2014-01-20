@@ -27,7 +27,7 @@
     <version>5</version>
   </parent>
 
-  <groupId>org.sonatype.flexmojos</groupId>
+  <groupId>net.flexmojos.oss</groupId>
   <artifactId>flexmojos-aggregator</artifactId>
   <version>3.10-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -67,6 +67,21 @@
       <url>${flexSnapshotUrl}</url>
     </snapshotRepository>
   </distributionManagement>
+
+  
+
+  <pluginRepositories>
+      <pluginRepository>
+        <id>sonatype-forge</id>
+        <url>https://repository.sonatype.org/content/groups/forge/</url>
+      </pluginRepository>
+  </pluginRepositories>
+  <repositories>
+      <repository>
+        <id>sonatype-forge</id>
+        <url>https://repository.sonatype.org/content/groups/forge/</url>
+      </repository>
+  </repositories>
 
   <build>
     <plugins>

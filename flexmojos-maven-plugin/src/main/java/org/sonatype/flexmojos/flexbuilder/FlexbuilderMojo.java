@@ -865,13 +865,13 @@ public class FlexbuilderMojo
         {
             localesList.addAll( Arrays.asList( locales ) );
         }
-        if ( compiledLocales != null )
+        if ( localesCompiled != null )
         {
-            localesList.addAll( Arrays.asList( compiledLocales ) );
+            localesList.addAll( Arrays.asList(localesCompiled) );
         }
-        if ( runtimeLocales != null )
+        if ( localesRuntime != null )
         {
-            localesList.addAll( Arrays.asList( runtimeLocales ) );
+            localesList.addAll( Arrays.asList(localesRuntime) );
         }
         if ( localesList.isEmpty() )
         {
@@ -1040,7 +1040,7 @@ public class FlexbuilderMojo
         while ( iter.hasNext() )
         {
             FbIdeDependency dep = iter.next();
-            if ( !dep.getGroupId().equals( "com.adobe.flex.framework" ) )
+            if ( !dep.getGroupId().equals( "com.adobe.flex.framework" ) && !dep.getGroupId().equals( "com.adobe.flash.framework" ) && !dep.getGroupId().equals( "com.adobe.air.framework" ))
                 nonSdkDeps.add( dep );
         }
 
@@ -1188,8 +1188,11 @@ public class FlexbuilderMojo
         throws MojoExecutionException
     {
         LinkType type = sdk.getDefaultLinkType();
-
+        if (SWC.equals(packaging)) {
+            type = LinkType.RSL;
+        }
         return String.valueOf( type.getId() );
+
     }
 
     @SuppressWarnings( "unchecked" )
@@ -1205,8 +1208,8 @@ public class FlexbuilderMojo
 
         for ( Artifact artifact : artifacts )
         {
-            if ( "com.adobe.flex.framework".equals( artifact.getGroupId() )
-                && ( "playerglobal".equals( artifact.getArtifactId() ) || "airglobal".equals( artifact.getArtifactId() ) )
+            if ( ( "com.adobe.flash.framework".equals( artifact.getGroupId() ) && "playerglobal".equals( artifact.getArtifactId() ) )
+                || ( "com.adobe.air.framework".equals( artifact.getGroupId() ) && "airglobal".equals( artifact.getArtifactId() ) )
                 && "swc".equals( artifact.getType() ) )
             {
                 getLog().debug( "Found Flex framework artifact. Scope: [" + artifact.getScope() + "]; " + "Version: ["
@@ -1825,8 +1828,10 @@ public class FlexbuilderMojo
             }
             else
             {
-                getLog().warn( "Player global doesn't cointain classifier" );
-                return version;
+                globalVersion = globalArtifact.getVersion();
+                playerGlobalVersion = splitVersion(globalVersion);
+                // getLog().warn( "Player global doesn't cointain classifier" );
+                // return version;
             }
         }
         else

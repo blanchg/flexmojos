@@ -335,7 +335,7 @@ public class CopyMojo
     private List<Artifact> getRuntimeLocalesDependencies( MavenProject artifactProject )
     {
         String[] runtimeLocales =
-            CompileConfigurationLoader.getCompilerPluginSettings( artifactProject, "runtimeLocales" );
+            CompileConfigurationLoader.getCompilerPluginSettings( artifactProject, "localesRuntime" );
         if ( runtimeLocales == null || runtimeLocales.length == 0 )
         {
             return Collections.emptyList();

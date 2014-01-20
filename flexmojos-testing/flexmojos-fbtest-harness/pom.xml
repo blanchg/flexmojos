@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.flexmojos</groupId>
+    <groupId>net.flexmojos.oss</groupId>
     <artifactId>flexmojos-testing</artifactId>
     <version>3.9-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -179,7 +179,7 @@
               <goal>copy-dependencies</goal>
             </goals>
             <configuration>
-              <includeGroupIds>org.sonatype.flexmojos</includeGroupIds>
+              <includeGroupIds>net.flexmojos.oss</includeGroupIds>
               <outputDirectory>${fake-repo}</outputDirectory>
               <useRepositoryLayout>true</useRepositoryLayout>
               <generateRepositoryMetadatas>true</generateRepositoryMetadatas>
@@ -242,7 +242,7 @@
   <dependencies>
   
     <dependency>
-      <groupId>org.sonatype.flexmojos</groupId>
+      <groupId>net.flexmojos.oss</groupId>
       <artifactId>flexmojos-maven-plugin</artifactId>
       <version>${project.parent.version}</version>
     </dependency>

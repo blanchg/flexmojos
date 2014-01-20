@@ -30,7 +30,7 @@
 #if( $flexSDK != "default" )
 			flexSDK="$flexSDK"
 #end 
-            additionalCompilerArguments="$!additionalCompilerArguments"
+            additionalCompilerArguments="$!additionalCompilerArguments --compiler.locale=en_US --compiler.warn-no-constructor=false"
             autoRSLOrdering="true"
             copyDependentFiles="true"
             fteInMXComponents="false" 

@@ -31,6 +31,7 @@ import org.sonatype.flexmojos.flexbuilder.ProjectType;
 
 public class LocalSdk
 {
+    public static final String PLAYER_GROUP_ID = "com.adobe.flash.framework";
     public static final String SDK_GROUP_ID = "com.adobe.flex.framework";
 
     public enum Version
@@ -121,7 +122,7 @@ public class LocalSdk
             while ( iter.hasNext() )
             {
                 FbIdeDependency dep = iter.next();
-                if ( "com.adobe.flex.framework".equals( dep.getGroupId() ) && "swc".equals( dep.getType() ) )
+                if ( ( "com.adobe.flex.framework".equals( dep.getGroupId() ) || "com.adobe.flash.framework".equals( dep.getGroupId() ) )&& "swc".equals( dep.getType() ) )
                 {
                     LocalSdkEntry localEntry = entries.get( dep.getArtifactId() );
                     dep.setLocalSdkEntry( localEntry );
@@ -172,23 +173,23 @@ public class LocalSdk
 
         LinkType type = LinkType.MERGE;
 
-        switch ( v )
-        {
-            case FLEX4_0_0:
-                type = LinkType.RSL; // Yes it is RSL and NOT RSL_DIGEST.
-                break;
-            case FLEX3_5_0:
-            case FLEX3_4_0:
-            case FLEX3_3_0:
-            case FLEX3_2_0:
-            case FLEX3_1_0:
-            case FLEX3_0_0:
-                type = LinkType.MERGE;
-                break;
-            default:
-                type = LinkType.MERGE;
-                break;
-        }
+        // switch ( v )
+        // {
+        //     case FLEX4_0_0:
+        //         type = LinkType.RSL; // Yes it is RSL and NOT RSL_DIGEST.
+        //         break;
+        //     case FLEX3_5_0:
+        //     case FLEX3_4_0:
+        //     case FLEX3_3_0:
+        //     case FLEX3_2_0:
+        //     case FLEX3_1_0:
+        //     case FLEX3_0_0:
+        //         type = LinkType.MERGE;
+        //         break;
+        //     default:
+        //         type = LinkType.MERGE;
+        //         break;
+        // }
 
         return type;
     }
@@ -224,7 +225,7 @@ public class LocalSdk
         HashMap<String, LocalSdkEntry> map = new HashMap<String, LocalSdkEntry>();
 
         Version v = getBestVersion( version );
-
+        System.out.println("Have version while getting entries: " + v.toString());
         switch ( v )
         {
             case FLEX4_0_0:
@@ -337,13 +338,13 @@ public class LocalSdk
                                                 projectType,
                                                 new ProjectLinkTypeMap(
                                                                         new ProjectLinkTypeEntry( ProjectType.FLEX,
-                                                                                                  LinkType.RSL_DIGEST,
+                                                                                                  LinkType.EXTERNAL,
                                                                                                   3 ),
                                                                         new ProjectLinkTypeEntry(
                                                                                                   ProjectType.FLEX_LIBRARY,
                                                                                                   LinkType.EXTERNAL, 3 ),
                                                                         new ProjectLinkTypeEntry( ProjectType.AIR,
-                                                                                                  LinkType.MERGE ),
+                                                                                                  LinkType.EXTERNAL ),
                                                                         new ProjectLinkTypeEntry(
                                                                                                   ProjectType.AIR_LIBRARY,
                                                                                                   LinkType.EXTERNAL ) ) ) );
@@ -416,6 +417,29 @@ public class LocalSdk
                                                                         new ProjectLinkTypeEntry(
                                                                                                   ProjectType.AIR_LIBRARY,
                                                                                                   LinkType.EXTERNAL ) ) ) );
+                // Moved
+                if ( !map.containsKey( "mx" ) ) {
+                    map.put( "mx",
+                            new LocalSdkEntry(
+                                    SDK_GROUP_ID,
+                                    "mx",
+                                    "${PROJECT_FRAMEWORKS}/libs/mx/mx.swc",
+                                    "${PROJECT_FRAMEWORKS}/projects/mx/src",
+                                    projectType,
+                                    new ProjectLinkTypeMap(
+                                            new ProjectLinkTypeEntry( ProjectType.FLEX,
+                                                    LinkType.RSL_DIGEST,
+                                                    4 ),
+                                            new ProjectLinkTypeEntry(
+                                                    ProjectType.FLEX_LIBRARY,
+                                                    LinkType.EXTERNAL, 4 ),
+                                            new ProjectLinkTypeEntry( ProjectType.AIR,
+                                                    LinkType.MERGE ),
+                                            new ProjectLinkTypeEntry(
+                                                    ProjectType.AIR_LIBRARY,
+                                                    LinkType.EXTERNAL ) ) ) );
+                    System.out.println("** Adding the MX entry");
+                }
                 // New
                 if ( !map.containsKey( "sparkskins" ) )
                     map.put( "sparkskins",
@@ -692,7 +716,7 @@ public class LocalSdk
                 if ( !map.containsKey( "playerglobal" ) )
                     map.put( "playerglobal",
                              new LocalSdkEntry(
-                                                SDK_GROUP_ID,
+                                                PLAYER_GROUP_ID,
                                                 "playerglobal",
                                                 null,
                                                 null,

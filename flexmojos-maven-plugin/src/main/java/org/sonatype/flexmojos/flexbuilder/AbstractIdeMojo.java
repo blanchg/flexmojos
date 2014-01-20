@@ -89,16 +89,16 @@ public class AbstractIdeMojo
      * Usage:
      * 
      * <pre>
-     * &lt;runtimeLocales&gt;
+     * &lt;localesRuntime&gt;
      *    &lt;locale&gt;en_US&lt;/locale&gt;
      *    &lt;locale&gt;pt_BR&lt;/locale&gt;
      *    &lt;locale&gt;es_ES&lt;/locale&gt;
-     * &lt;/runtimeLocales&gt;
+     * &lt;/localesRuntime&gt;
      * </pre>
      * 
      * @parameter
      */
-    protected String[] runtimeLocales;
+    protected String[] localesRuntime;
 
     /**
      * Sets the locales that the compiler uses to replace <code>{locale}</code> tokens that appear in some configuration
@@ -106,16 +106,16 @@ public class AbstractIdeMojo
      * Usage:
      * 
      * <pre>
-     * &lt;compiledLocales&gt;
+     * &lt;localesCompiled&gt;
      *    &lt;locale&gt;en_US&lt;/locale&gt;
      *    &lt;locale&gt;pt_BR&lt;/locale&gt;
      *    &lt;locale&gt;es_ES&lt;/locale&gt;
-     * &lt;/compiledLocales&gt;
+     * &lt;/localesCompiled&gt;
      * </pre>
      * 
      * @parameter
      */
-    protected String[] compiledLocales;
+    protected String[] localesCompiled;
 
     /**
      * Define the base path to locate resouce bundle files Accept some special tokens:
@@ -290,7 +290,7 @@ public class AbstractIdeMojo
             }
         }
 
-        if ( Boolean.TRUE.equals( mergeResourceBundle ) || compiledLocales != null || runtimeLocales != null )
+        if ( Boolean.TRUE.equals( mergeResourceBundle ) || localesCompiled != null || localesRuntime != null )
         {
             sources.add( resourceBundlePath );
         }

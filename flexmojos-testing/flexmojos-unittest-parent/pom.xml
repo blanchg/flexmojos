@@ -21,7 +21,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.flexmojos</groupId>
+    <groupId>net.flexmojos.oss</groupId>
     <artifactId>flexmojos-testing</artifactId>
     <version>3.10-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -36,7 +36,7 @@
     <sourceDirectory>src/main/flex</sourceDirectory>
     <plugins>
       <plugin>
-        <groupId>org.sonatype.flexmojos</groupId>
+        <groupId>net.flexmojos.oss</groupId>
         <artifactId>flexmojos-maven-plugin</artifactId>
         <version>${project.version}</version>
         <extensions>true</extensions>
@@ -87,7 +87,7 @@
       <build>
         <plugins>
           <plugin>
-            <groupId>org.sonatype.flexmojos</groupId>
+            <groupId>net.flexmojos.oss</groupId>
             <artifactId>flexmojos-maven-plugin</artifactId>
             <version>${project.version}</version>
             <executions>

@@ -23,7 +23,7 @@
 
   <parent>
     <artifactId>flexmojos-parent</artifactId>
-    <groupId>org.sonatype.flexmojos</groupId>
+    <groupId>net.flexmojos.oss</groupId>
     <version>3.10-SNAPSHOT</version>
     <relativePath>../flexmojos-parent/pom.xml</relativePath>
   </parent>

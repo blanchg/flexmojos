@@ -45,7 +45,7 @@
 
     <plugins>
       <plugin> <!-- Flex (SWC and SWF) compilation -->
-        <groupId>org.sonatype.flexmojos</groupId>
+        <groupId>net.flexmojos.oss</groupId>
         <artifactId>flexmojos-maven-plugin</artifactId>
         <extensions>true</extensions>
         <configuration>

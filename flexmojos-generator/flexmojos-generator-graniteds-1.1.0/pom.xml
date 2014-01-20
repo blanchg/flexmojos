@@ -23,7 +23,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>org.sonatype.flexmojos</groupId>
+    <groupId>net.flexmojos.oss</groupId>
     <artifactId>flexmojos-generator</artifactId>
     <version>3.10-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
@@ -52,7 +52,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.sonatype.flexmojos</groupId>
+      <groupId>net.flexmojos.oss</groupId>
       <artifactId>flexmojos-generator-api</artifactId>
       <version>${pom.version}</version>
     </dependency>

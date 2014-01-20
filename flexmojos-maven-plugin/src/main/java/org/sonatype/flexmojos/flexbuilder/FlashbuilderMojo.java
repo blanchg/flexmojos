@@ -36,7 +36,7 @@ public class FlashbuilderMojo
     extends FlexbuilderMojo
 {
     /**
-     * IDE Verion. First release of Flashbuilder is version 6.
+     * IDE Verion. First release of Flashbuilder is version 6. FlashBuilder 4.7 is 11
      * 
      * @parameter default-value=6
      */

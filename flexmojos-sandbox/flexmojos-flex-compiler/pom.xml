@@ -22,7 +22,7 @@
 
   <parent>
     <artifactId>flexmojos-sandbox</artifactId>
-    <groupId>org.sonatype.flexmojos</groupId>
+    <groupId>net.flexmojos.oss</groupId>
     <version>3.5-SNAPSHOT</version>
   </parent>
 
@@ -31,7 +31,7 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.sonatype.flexmojos</groupId>
+        <groupId>net.flexmojos.oss</groupId>
         <artifactId>flexmojos-maven-plugin</artifactId>
         <version>3.3.0</version>
         <configuration>
@@ -53,7 +53,7 @@
         </executions>
         <dependencies>
           <dependency>
-            <groupId>org.sonatype.flexmojos</groupId>
+            <groupId>net.flexmojos.oss</groupId>
             <artifactId>flexmojos-generator-compiler-iface</artifactId>
             <version>3.5-SNAPSHOT</version>
           </dependency>
@@ -134,7 +134,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.sonatype.flexmojos</groupId>
+      <groupId>net.flexmojos.oss</groupId>
       <artifactId>flexmojos-generator-compiler-iface</artifactId>
       <version>3.5-SNAPSHOT</version>
     </dependency>

@@ -174,11 +174,11 @@ public abstract class AbstractCompilerMojo<E extends Builder>
      * Usage:
      * 
      * <pre>
-     * &lt;compiledLocales&gt;
+     * &lt;localesCompiled&gt;
      *    &lt;locale&gt;en_US&lt;/locale&gt;
      *    &lt;locale&gt;pt_BR&lt;/locale&gt;
      *    &lt;locale&gt;es_ES&lt;/locale&gt;
-     * &lt;/compiledLocales&gt;
+     * &lt;/localesCompiled&gt;
      * </pre>
      * 
      * @parameter
@@ -766,11 +766,11 @@ public abstract class AbstractCompilerMojo<E extends Builder>
      * Usage:
      * 
      * <pre>
-     * &lt;runtimeLocales&gt;
+     * &lt;localesRuntime&gt;
      *    &lt;locale&gt;en_US&lt;/locale&gt;
      *    &lt;locale&gt;pt_BR&lt;/locale&gt;
      *    &lt;locale&gt;es_ES&lt;/locale&gt;
-     * &lt;/runtimeLocales&gt;
+     * &lt;/localesRuntime&gt;
      * </pre>
      * 
      * @parameter
@@ -804,7 +804,7 @@ public abstract class AbstractCompilerMojo<E extends Builder>
 
     /**
      * Run the AS3 compiler in a mode that detects legal but potentially incorrect code. Equivalent compiler option:
-     * warnings
+     * compilerWarnings
      * 
      * @parameter default-value="true"
      */
@@ -915,7 +915,7 @@ public abstract class AbstractCompilerMojo<E extends Builder>
     private boolean verifyDigests;
 
     /**
-     * Enables checking of the following ActionScript warnings:
+     * Enables checking of the following ActionScript compilerWarnings:
      * 
      * <pre>
      * --compiler.warn-array-tostring-changes
@@ -969,7 +969,7 @@ public abstract class AbstractCompilerMojo<E extends Builder>
      * @see Warning
      * @parameter
      */
-    private Warning warnings;
+    private Warning compilerWarnings;
 
     /**
      * Construct instance
@@ -1317,7 +1317,7 @@ public abstract class AbstractCompilerMojo<E extends Builder>
         configureNamespaces( sdkConfigResolver );
 
         configuration.optimize( optimize );
-        if ( this.warnings != null )
+        if ( this.compilerWarnings != null )
         {
             configureWarnings( configuration );
         }
@@ -1578,25 +1578,25 @@ public abstract class AbstractCompilerMojo<E extends Builder>
     }
 
     /**
-     * Configure warnings
+     * Configure compilerWarnings
      * 
      * @param cfg Configuration instance to configure
      */
     private void configureWarnings( Configuration cfg )
     {
-        if ( !warnings.getActionScript() || !showWarnings )
+        if ( !compilerWarnings.getActionScript() || !showWarnings )
         {
             cfg.showActionScriptWarnings( false );
         }
-        if ( !warnings.getBinding() || !showWarnings )
+        if ( !compilerWarnings.getBinding() || !showWarnings )
         {
             cfg.showBindingWarnings( false );
         }
-        if ( !warnings.getDeprecation() || !showWarnings )
+        if ( !compilerWarnings.getDeprecation() || !showWarnings )
         {
             cfg.showDeprecationWarnings( false );
         }
-        if ( !warnings.getUnusedTypeSelector() || !showWarnings )
+        if ( !compilerWarnings.getUnusedTypeSelector() || !showWarnings )
         {
             cfg.showUnusedTypeSelectorWarnings( false );
         }
@@ -1606,51 +1606,51 @@ public abstract class AbstractCompilerMojo<E extends Builder>
             return;
         }
 
-        configureWarningIfTrue( Configuration.WARN_ARRAY_TOSTRING_CHANGES, warnings.getArrayTostringChanges(), cfg );
+        configureWarningIfTrue( Configuration.WARN_ARRAY_TOSTRING_CHANGES, compilerWarnings.getArrayTostringChanges(), cfg );
         configureWarningIfFalse( Configuration.WARN_ASSIGNMENT_WITHIN_CONDITIONAL,
-                                 warnings.getAssignmentWithinConditional(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_ARRAY_CAST, warnings.getBadArrayCast(), cfg );
+                                 compilerWarnings.getAssignmentWithinConditional(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_ARRAY_CAST, compilerWarnings.getBadArrayCast(), cfg );
 
-        configureWarningIfFalse( Configuration.WARN_BAD_BOOLEAN_ASSIGNMENT, warnings.getBadBooleanAssignment(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_DATE_CAST, warnings.getBadDateCast(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_ES3_TYPE_METHOD, warnings.getBadEs3TypeMethod(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_ES3_TYPE_PROP, warnings.getBadEs3TypeProp(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_NAN_COMPARISON, warnings.getBadNanComparison(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_NULL_ASSIGNMENT, warnings.getBadNullAssignment(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_NULL_COMPARISON, warnings.getBadNullComparison(), cfg );
-        configureWarningIfFalse( Configuration.WARN_BAD_UNDEFINED_COMPARISON, warnings.getBadUndefinedComparison(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_BOOLEAN_ASSIGNMENT, compilerWarnings.getBadBooleanAssignment(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_DATE_CAST, compilerWarnings.getBadDateCast(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_ES3_TYPE_METHOD, compilerWarnings.getBadEs3TypeMethod(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_ES3_TYPE_PROP, compilerWarnings.getBadEs3TypeProp(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_NAN_COMPARISON, compilerWarnings.getBadNanComparison(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_NULL_ASSIGNMENT, compilerWarnings.getBadNullAssignment(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_NULL_COMPARISON, compilerWarnings.getBadNullComparison(), cfg );
+        configureWarningIfFalse( Configuration.WARN_BAD_UNDEFINED_COMPARISON, compilerWarnings.getBadUndefinedComparison(), cfg );
         configureWarningIfTrue( Configuration.WARN_BOOLEAN_CONSTRUCTOR_WITH_NO_ARGS,
-                                warnings.getBooleanConstructorWithNoArgs(), cfg );
-        configureWarningIfTrue( Configuration.WARN_CHANGES_IN_RESOLVE, warnings.getChangesInResolve(), cfg );
-        configureWarningIfFalse( Configuration.WARN_CLASS_IS_SEALED, warnings.getClassIsSealed(), cfg );
-        configureWarningIfFalse( Configuration.WARN_CONST_NOT_INITIALIZED, warnings.getConstNotInitialized(), cfg );
-        configureWarningIfTrue( Configuration.WARN_CONSTRUCTOR_RETURNS_VALUE, warnings.getConstructorReturnsValue(),
+                                compilerWarnings.getBooleanConstructorWithNoArgs(), cfg );
+        configureWarningIfTrue( Configuration.WARN_CHANGES_IN_RESOLVE, compilerWarnings.getChangesInResolve(), cfg );
+        configureWarningIfFalse( Configuration.WARN_CLASS_IS_SEALED, compilerWarnings.getClassIsSealed(), cfg );
+        configureWarningIfFalse( Configuration.WARN_CONST_NOT_INITIALIZED, compilerWarnings.getConstNotInitialized(), cfg );
+        configureWarningIfTrue( Configuration.WARN_CONSTRUCTOR_RETURNS_VALUE, compilerWarnings.getConstructorReturnsValue(),
                                 cfg );
         configureWarningIfTrue( Configuration.WARN_DEPRECATED_EVENT_HANDLER_ERROR,
-                                warnings.getDeprecatedEventHandlerError(), cfg );
-        configureWarningIfFalse( Configuration.WARN_DEPRECATED_FUNCTION_ERROR, warnings.getDeprecatedFunctionError(),
+                                compilerWarnings.getDeprecatedEventHandlerError(), cfg );
+        configureWarningIfFalse( Configuration.WARN_DEPRECATED_FUNCTION_ERROR, compilerWarnings.getDeprecatedFunctionError(),
                                  cfg );
-        configureWarningIfFalse( Configuration.WARN_DEPRECATED_PROPERTY_ERROR, warnings.getDeprecatedPropertyError(),
+        configureWarningIfFalse( Configuration.WARN_DEPRECATED_PROPERTY_ERROR, compilerWarnings.getDeprecatedPropertyError(),
                                  cfg );
-        configureWarningIfFalse( Configuration.WARN_DUPLICATE_ARGUMENT_NAMES, warnings.getDuplicateArgumentNames(), cfg );
-        configureWarningIfFalse( Configuration.WARN_DUPLICATE_VARIABLE_DEF, warnings.getDuplicateVariableDef(), cfg );
-        configureWarningIfTrue( Configuration.WARN_FOR_VAR_IN_CHANGES, warnings.getForVarInChanges(), cfg );
-        configureWarningIfFalse( Configuration.WARN_IMPORT_HIDES_CLASS, warnings.getImportHidesClass(), cfg );
-        configureWarningIfFalse( Configuration.WARN_INSTANCEOF_CHANGES, warnings.getInstanceOfChanges(), cfg );
-        configureWarningIfFalse( Configuration.WARN_INTERNAL_ERROR, warnings.getInternalError(), cfg );
-        configureWarningIfFalse( Configuration.WARN_LEVEL_NOT_SUPPORTED, warnings.getLevelNotSupported(), cfg );
-        configureWarningIfFalse( Configuration.WARN_MISSING_NAMESPACE_DECL, warnings.getMissingNamespaceDecl(), cfg );
-        configureWarningIfFalse( Configuration.WARN_NEGATIVE_UINT_LITERAL, warnings.getNegativeUintLiteral(), cfg );
-        configureWarningIfFalse( Configuration.WARN_NO_CONSTRUCTOR, warnings.getNoConstructor(), cfg );
+        configureWarningIfFalse( Configuration.WARN_DUPLICATE_ARGUMENT_NAMES, compilerWarnings.getDuplicateArgumentNames(), cfg );
+        configureWarningIfFalse( Configuration.WARN_DUPLICATE_VARIABLE_DEF, compilerWarnings.getDuplicateVariableDef(), cfg );
+        configureWarningIfTrue( Configuration.WARN_FOR_VAR_IN_CHANGES, compilerWarnings.getForVarInChanges(), cfg );
+        configureWarningIfFalse( Configuration.WARN_IMPORT_HIDES_CLASS, compilerWarnings.getImportHidesClass(), cfg );
+        configureWarningIfFalse( Configuration.WARN_INSTANCEOF_CHANGES, compilerWarnings.getInstanceOfChanges(), cfg );
+        configureWarningIfFalse( Configuration.WARN_INTERNAL_ERROR, compilerWarnings.getInternalError(), cfg );
+        configureWarningIfFalse( Configuration.WARN_LEVEL_NOT_SUPPORTED, compilerWarnings.getLevelNotSupported(), cfg );
+        configureWarningIfFalse( Configuration.WARN_MISSING_NAMESPACE_DECL, compilerWarnings.getMissingNamespaceDecl(), cfg );
+        configureWarningIfFalse( Configuration.WARN_NEGATIVE_UINT_LITERAL, compilerWarnings.getNegativeUintLiteral(), cfg );
+        configureWarningIfFalse( Configuration.WARN_NO_CONSTRUCTOR, compilerWarnings.getNoConstructor(), cfg );
         configureWarningIfTrue( Configuration.WARN_NO_EXPLICIT_SUPER_CALL_IN_CONSTRUCTOR,
-                                warnings.getNoExplicitSuperCallInConstructor(), cfg );
-        configureWarningIfFalse( Configuration.WARN_NO_TYPE_DECL, warnings.getNoTypeDecl(), cfg );
-        configureWarningIfTrue( Configuration.WARN_NUMBER_FROM_STRING_CHANGES, warnings.getNumberFromStringChanges(),
+                                compilerWarnings.getNoExplicitSuperCallInConstructor(), cfg );
+        configureWarningIfFalse( Configuration.WARN_NO_TYPE_DECL, compilerWarnings.getNoTypeDecl(), cfg );
+        configureWarningIfTrue( Configuration.WARN_NUMBER_FROM_STRING_CHANGES, compilerWarnings.getNumberFromStringChanges(),
                                 cfg );
-        configureWarningIfTrue( Configuration.WARN_SCOPING_CHANGE_IN_THIS, warnings.getScopingChangeInThis(), cfg );
-        configureWarningIfFalse( Configuration.WARN_SLOW_TEXTFIELD_ADDITION, warnings.getSlowTextFieldAddition(), cfg );
-        configureWarningIfFalse( Configuration.WARN_UNLIKELY_FUNCTION_VALUE, warnings.getUnlikelyFunctionValue(), cfg );
-        configureWarningIfTrue( Configuration.WARN_XML_CLASS_HAS_CHANGED, warnings.getXmlClassHasChanged(), cfg );
+        configureWarningIfTrue( Configuration.WARN_SCOPING_CHANGE_IN_THIS, compilerWarnings.getScopingChangeInThis(), cfg );
+        configureWarningIfFalse( Configuration.WARN_SLOW_TEXTFIELD_ADDITION, compilerWarnings.getSlowTextFieldAddition(), cfg );
+        configureWarningIfFalse( Configuration.WARN_UNLIKELY_FUNCTION_VALUE, compilerWarnings.getUnlikelyFunctionValue(), cfg );
+        configureWarningIfTrue( Configuration.WARN_XML_CLASS_HAS_CHANGED, compilerWarnings.getXmlClassHasChanged(), cfg );
 
         configureWarnings3( cfg );
     }
@@ -1659,9 +1659,9 @@ public abstract class AbstractCompilerMojo<E extends Builder>
     @IgnoreJRERequirement
     private void configureWarnings3( Configuration cfg )
     {
-        if ( !warnings.getShadowedDeviceFont() )
+        if ( !compilerWarnings.getShadowedDeviceFont() )
         {
-            cfg.showShadowedDeviceFontWarnings( warnings.getShadowedDeviceFont() );
+            cfg.showShadowedDeviceFontWarnings( compilerWarnings.getShadowedDeviceFont() );
         }
     }
 
@@ -2495,8 +2495,27 @@ public abstract class AbstractCompilerMojo<E extends Builder>
         int[] playerGlobalVersion;
         if ( globalVersion == null )
         {
-            getLog().warn( "Player global doesn't cointain classifier" );
-            return;
+            // Older playerglobal artifacts had the version appended to the artifact version.
+            // Example: 9-3.2.0.3958
+            if ( globalArtifact.getVersion().contains( "-" ) )
+            {
+                globalVersion = globalArtifact.getVersion().split( "-" )[0];
+                if ( globalVersion == null )
+                {
+                    throw new MojoExecutionException( "Player global doesn't contain classifier" );
+                }
+                else
+                {
+                    playerGlobalVersion = splitVersion( globalVersion );
+                }
+            }
+            else
+            {
+                globalVersion = globalArtifact.getVersion();
+                playerGlobalVersion = splitVersion(globalVersion);
+                // getLog().warn( "Player global doesn't cointain classifier" );
+                // return version;
+            }
         }
         else
         {

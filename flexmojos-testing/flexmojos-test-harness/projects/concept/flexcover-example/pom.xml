@@ -22,7 +22,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.sonatype.flexmojos</groupId>
+		<groupId>net.flexmojos.oss</groupId>
 		<artifactId>flexmojos-flex-super-pom</artifactId>
 		<version>%{flexmojos.version}</version>
 	</parent>
@@ -38,12 +38,12 @@
 		<testSourceDirectory>tests</testSourceDirectory>
 	    <plugins>
 	        <plugin>
-	            <groupId>org.sonatype.flexmojos</groupId>
+	            <groupId>net.flexmojos.oss</groupId>
 	            <artifactId>flexmojos-maven-plugin</artifactId>
 	            <extensions>true</extensions>
 	        </plugin>
 	        <plugin>
-	            <groupId>org.sonatype.flexmojos</groupId>
+	            <groupId>net.flexmojos.oss</groupId>
 	            <artifactId>flexmojos-maven-plugin</artifactId>
 				<version>%{flexmojos.version}</version>
 				<dependencies>
@@ -67,11 +67,11 @@
 	<reporting>
 		<plugins>
 			<plugin>
-				<groupId>org.sonatype.flexmojos</groupId>
+				<groupId>net.flexmojos.oss</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
 			</plugin>
 	      	<plugin>
-				<groupId>org.sonatype.flexmojos</groupId>
+				<groupId>net.flexmojos.oss</groupId>
 				<artifactId>flexcover</artifactId>
 				<version>%{flexmojos.version}</version>
 	      	</plugin>

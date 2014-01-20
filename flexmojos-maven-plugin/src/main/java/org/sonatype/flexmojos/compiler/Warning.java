@@ -174,7 +174,7 @@ public class Warning
     /**
      * Missing constructor.
      */
-    private boolean noConstructor = true;
+    private boolean noConstructor = false;
 
     /**
      * The super() statement was not called within the constructor.

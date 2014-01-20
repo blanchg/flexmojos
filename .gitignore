@@ -19,9 +19,12 @@ target/
 *.ipr
 *.iml
 *.iws
+.idea/
 
 # Other
 .svn/
 bin/
 
 .scala_dependencies
+
+flexmojos-testing/flexmojos-tester/FlashPlayer.exe
